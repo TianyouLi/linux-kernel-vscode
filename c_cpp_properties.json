@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+		"/usr/include/linux"
+            ],
+            "defines": [
+                "HAVE_SLANG_SUPPORT",
+                "HAVE_LIBLLVM_SUPPORT"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "intelliSenseMode": "linux-clang-x64"
+        }
+    ],
+    "version": 4
+}

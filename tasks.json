@@ -142,6 +142,21 @@
     {
       "label": "Build systemtap tracer",
       "args": ["systemtap-build"],
+    },
+    {
+      "taskName": "build linux perf",
+      "command": "make",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "args": [
+        "DEBUG=true"
+      ],
+      "options": {
+        "cwd": "${workspaceRoot}/tools/perf"
+      }
     }
   ]
 }

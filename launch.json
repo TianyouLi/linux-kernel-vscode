@@ -2,6 +2,102 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "bashdb",
+      "request": "launch",
+      "name": "Bash-Debug (hardcoded script name)",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/tools/perf/perf-archive.sh",
+      "args": [
+        "perf.test.data",
+        "--all",
+        "--exclude-buildids",
+        "${workspaceFolder}/buildids_blacklist.txt"
+      ]
+    },
+
+    {
+      "name": "(gdb) perf report debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/perf/perf",
+      "args": [
+        "report",
+        "-i",
+        "${workspaceFolder}/tools/perf/perf.c2c.data",
+        "--vmlinux",
+        "/home/tli7/sandbox/linux/vmlinux",
+        "--objdump",
+        "/usr/bin/objdump"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        },
+        {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+            "text": "-gdb-set detach-on-fork off",
+            "ignoreFailures": true
+        },
+        {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+            "text": "-gdb-set follow-fork-mode child",
+            "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "build linux perf"
+    },
+
+    {
+      "name": "(gdb) perf c2c debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/perf/perf",
+      "args": [
+        "c2c",
+        "report",
+        "-i",
+        "${workspaceFolder}/tools/perf/perf.c2c.data",
+        "--vmlinux",
+        "/home/tli7/sandbox/linux/vmlinux"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        },
+        {   "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+            "text": "-gdb-set detach-on-fork off",
+            "ignoreFailures": true
+        },
+        {   "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+            "text": "-gdb-set follow-fork-mode child",
+            "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "build linux perf"
+    },
+    {
       "name": "Start and debug kernel in a VM",
       "type": "cppdbg",
       "request": "launch",
